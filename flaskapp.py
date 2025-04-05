@@ -32,6 +32,22 @@ def add_user():
         # Render the form page if the request method is GET
         return render_template('add_user.html')
 
+@app.route('/delete-user', methods=['GET', 'POST'])
+def delete_user():
+    if request.method == 'POST':
+        # Extract form data
+        name = request.form['name']
+        
+        # Process the data (e.g., add it to a database)
+        # For now, let's just print it to the console
+        print("Name:", name, ":")
+        
+        flash('User deleted successfully!', 'warning') 
+        # Redirect to home page or another page upon successful submission
+        return redirect(url_for('home'))
+    else:
+        # Render the form page if the request method is GET
+        return render_template('delete_user.html')
 
 @app.route('/display-users')
 def display_users():
@@ -39,7 +55,6 @@ def display_users():
     # note that this could have been a result from an SQL query :) 
     users_list = (('John','Doe','Comedy'),('Jane', 'Doe','Drama'))
     return render_template('display_users.html', users = users_list)
-
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
